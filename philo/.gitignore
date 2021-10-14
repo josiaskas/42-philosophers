@@ -1,4 +1,22 @@
-#editor
-*.vscode
+##### VisualStudioCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+#compiled
 philo
 *.o
+*.dll
+*.dylib
+*.lib
+*.a
+
+##### MacOS
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+
