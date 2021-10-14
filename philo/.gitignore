@@ -1,4 +1,4 @@
 #editor
-.vscode
+*.vscode
 philo
 *.o
