@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:12:25 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/14 16:30:19 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/17 01:15:02 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,39 @@ int	ft_atoi(const char *str)
 	return ((int)nbr);
 }
 
-unsigned int	get_number_from_str(const char *str)
+size_t	get_number_from_str(const char *str)
 {
-	unsigned int	number;
-	int				nbr;
+	size_t	number;
+	int		nbr;
 
 	number = 0;
 	nbr = ft_atoi(str);
-	if (nbr > 0)
-		number = (unsigned int)nbr;
+	if ((nbr > 0) && (nbr <= 2147483647))
+		number = (size_t)nbr;
 	return (number);
 }
 
-void	ft_print_usage_error(void)
+void	ft_bzero(void *s, size_t n)
 {
-	write(STDERR_FILENO, "./philo number_of_philosophers ", 32);
-	write(STDERR_FILENO, "time_to_die time_to_eat time_to_sleep ", 39);
-	write(STDERR_FILENO, "[number_of_times_each_philosopher_must_eat]\n", 45);
+	size_t			i;
+	unsigned char	*temp;
+
+	i = 0;
+	temp = (unsigned char *)s;
+	while (i < n)
+		temp[i++] = 0;
+	s = temp;
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*heap_p;
+	size_t	total_size;
+
+	total_size = count * size;
+	heap_p = malloc(total_size);
+	if (heap_p == NULL)
+		return (NULL);
+	ft_bzero(heap_p, total_size);
+	return (heap_p);
 }

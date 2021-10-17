@@ -6,7 +6,7 @@ philo/.vscode/*
 *.code-workspace
 
 #compiled
-philo
+philo/philo
 *.o
 *.dll
 *.dylib
