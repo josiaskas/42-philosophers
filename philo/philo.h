@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 14:55:37 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/17 03:10:59 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/18 01:46:31 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,17 @@
 # include <stdbool.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <sys/time.h>
 
 enum e_state
 {
 	waiting_fork,
+	take_fork,
 	eating,
 	sleeping,
 	thinking,
+	died,
+	bulimia,
 };
 
 typedef struct s_philospher
@@ -32,10 +36,12 @@ typedef struct s_philospher
 	pthread_t		thread_id;
 	pthread_mutex_t	*own_fork;
 	pthread_mutex_t	*nubble_fork;
-	pthread_mutex_t	*murder;
+	pthread_mutex_t	*sync;
 	size_t			tt_die;
 	size_t			tt_eat;
 	size_t			tt_sleep;
+	size_t			tw_eating;
+	size_t			life;
 	size_t			nbr_eat;
 	size_t			nbr_eat_max;
 	enum e_state	state;
@@ -49,13 +55,16 @@ typedef struct s_agora
 	size_t			tt_eat;
 	size_t			tt_sleep;
 	size_t			max_eat_nbr;
-	pthread_mutex_t	*murder;
+	pthread_mutex_t	*sync;
 }	t_agora;
 
+void	init_philosphers_data(t_agora *app);
 void	*genesis(void *philosopher);
+bool	sync_code(t_philo *kant);
 
 size_t	get_number_from_str(const char *str);
 void	ft_print_usage_error(void);
 bool	ft_parse_args(int argc, char *argv[], t_agora *app);
 void	*ft_calloc(size_t count, size_t size);
+size_t	ft_time(void);
 #endif
