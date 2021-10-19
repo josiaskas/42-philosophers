@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:12:25 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/17 01:15:02 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/19 05:52:02 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,18 +47,6 @@ int	ft_atoi(const char *str)
 	return ((int)nbr);
 }
 
-size_t	get_number_from_str(const char *str)
-{
-	size_t	number;
-	int		nbr;
-
-	number = 0;
-	nbr = ft_atoi(str);
-	if ((nbr > 0) && (nbr <= 2147483647))
-		number = (size_t)nbr;
-	return (number);
-}
-
 void	ft_bzero(void *s, size_t n)
 {
 	size_t			i;
@@ -82,4 +70,12 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(heap_p, total_size);
 	return (heap_p);
+}
+
+size_t	ft_time(void)
+{
+	struct timeval c_time;
+
+	gettimeofday(&c_time, NULL);
+	return ((c_time.tv_sec * 1000) + (c_time.tv_usec / 1000));
 }

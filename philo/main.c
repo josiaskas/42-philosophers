@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:58:40 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/18 02:47:54 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/19 06:38:05 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	run_threads(t_agora *app)
 		i += 2;
 	}
 	i = 1;
-	usleep(app->tt_eat - 1);
+	usleep(100);
 	while (i < app->philo_nbr)
 	{
 		table[i].life = start_time;
@@ -44,7 +44,8 @@ bool	agora_run(t_agora *app)
 	t_philo	*table;
 
 	app->table = (t_philo *)ft_calloc(app->philo_nbr, sizeof(t_philo));
-	if (!app->table)
+	app->couverts = (t_fork *)ft_calloc(app->philo_nbr, sizeof(t_fork));
+	if (!app->table || !app->couverts)
 		return (false);
 	table = app->table;
 	app->sync = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
@@ -71,12 +72,17 @@ int	main(int argc, char *argv[])
 		if (!ft_parse_args(argc, argv, &app))
 			return (1);
 		else
-			agora_run(&app);
+		{
+			if (!agora_run(&app))
+			{
+				write(STDERR_FILENO, "Philo: threads init error\n", 27);
+				return (2);
+			}
+			else
+				clean_table(&app);
+		}
 		return (0);
 	}
-	else
-	{
-		ft_print_usage_error();
-		return (1);
-	}
+	ft_print_usage_error();
+	return (1);
 }
