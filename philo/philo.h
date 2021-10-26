@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 14:55:37 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 06:17:47 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:13:00 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_agora
 
 void	init_philosphers_data(t_agora *app);
 void	*genesis(void *philosopher);
+void	*last_day(void *philosopher);
 bool	sync_code(t_philo *kant);
 
 void	clean_table(t_agora *app);
@@ -73,5 +74,6 @@ void	ft_print_usage_error(void);
 bool	ft_parse_args(int argc, char *argv[], t_agora *app);
 void	*ft_calloc(size_t count, size_t size);
 size_t	ft_time(void);
+void	ft_usleep(size_t time_in_ms);
 int		ft_atoi(const char *str);
 #endif

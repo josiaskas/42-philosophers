@@ -6,13 +6,23 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 22:35:56 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 06:43:45 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:10:37 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	ft_printer(t_philo	*rousseau)
+void	ft_usleep(size_t time_in_ms)
+{
+	size_t	start_time;
+
+	start_time = 0;
+	start_time = ft_time();
+	while ((ft_time() - start_time) < time_in_ms)
+		usleep(time_in_ms / 10);
+}
+
+static bool	ft_printer(t_philo	*rousseau)
 {
 	size_t	jesus_ac;
 	size_t	chronos;

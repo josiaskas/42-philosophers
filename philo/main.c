@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:58:40 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 06:38:05 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:16:10 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,13 @@ bool	agora_run(t_agora *app)
 	app->sync = (pthread_mutex_t *)ft_calloc(1, sizeof(pthread_mutex_t));
 	pthread_mutex_init(app->sync, NULL);
 	init_philosphers_data(app);
-	run_threads(app);
+	if (app->philo_nbr == 1)
+	{
+		table[0].life = ft_time();
+		pthread_create(&table[0].thread_id, NULL, last_day, (void *)&table[0]);
+	}
+	else
+		run_threads(app);
 	i = 0;
 	while (i < app->philo_nbr)
 	{

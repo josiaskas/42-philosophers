@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:22:34 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 06:39:11 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:15:05 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,21 @@ bool	eat(t_philo *diogene);
 bool	ft_sleep(t_philo *nietzsche);
 bool	think(t_philo *descartes);
 
-void	ft_usleep(size_t	time_in_ms)
+void	*last_day(void *philosopher)
 {
-	size_t	start_time;
+	t_philo	*confucius;
+	size_t	jesus_ac;
 
-	start_time = 0;
-	start_time = ft_time();
-	while ((ft_time() - start_time) < time_in_ms)
-		usleep(time_in_ms / 10);
+	confucius = (t_philo *)philosopher;
+	jesus_ac = ft_time() - confucius->life;
+	pthread_mutex_lock(confucius->own_fork->mutex);
+	printf("%ld 1 has taken a fork\n", jesus_ac);
+	confucius->own_fork->fork = true;
+	pthread_mutex_unlock(confucius->own_fork->mutex);
+	ft_usleep(confucius->tt_die);
+	jesus_ac = ft_time() - confucius->life;
+	printf("%ld 1 died\n", jesus_ac);
+	return (philosopher);
 }
 
 void	*genesis(void *philosopher)
