@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 00:26:32 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 06:08:45 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:24:36 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ void	ft_print_usage_error(void)
 {
 	write(2, "Usage: ./philo", 15);
 	write(2, "\033[0;32m number_of_philosophers\033[0;39m", 38);
-	write(2, "\033[0;33m time_to_die\033[0;39m", 27);
+	write(2, "\033[0;31m time_to_die\033[0;39m", 27);
 	write(2, "\033[0;34m time_to_eat\033[0;39m", 27);
-	write(2, "\033[0;34m time_to_sleep\033[0;39m", 29);
+	write(2, "\033[0;33m time_to_sleep\033[0;39m", 29);
 	write(2, " [number_of_times_each_philosopher_must_eat]\n", 46);
 }
