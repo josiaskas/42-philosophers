@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:12:25 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/19 05:52:02 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:18:20 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 size_t	ft_time(void)
 {
-	struct timeval c_time;
+	struct timeval	c_time;
 
 	gettimeofday(&c_time, NULL);
 	return ((c_time.tv_sec * 1000) + (c_time.tv_usec / 1000));
