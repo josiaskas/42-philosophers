@@ -6,11 +6,29 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 22:35:56 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/26 00:10:37 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/11/12 01:17:31 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+bool	check_died_waiting(t_philo *hugo)
+{
+	static bool	stopped = 0;
+
+	if (stopped >= 1)
+		return (false);
+	if ((long long)(hugo->tt_die - (ft_time() - hugo->last_eat))
+		< (long long)hugo->tt_eat)
+	{
+		hugo->state = died;
+		ft_usleep((hugo->tt_die - (ft_time() - hugo->last_eat)));
+		sync_code(hugo);
+		stopped++;
+		return (false);
+	}
+	return (true);
+}
 
 void	ft_usleep(size_t time_in_ms)
 {

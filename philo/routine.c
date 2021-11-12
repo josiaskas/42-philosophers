@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:22:34 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/26 00:15:05 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/11/12 01:21:14 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,23 @@ void	*genesis(void *philosopher)
 
 bool	eat(t_philo *diogene)
 {
+	static bool	stopped = 0;
+
+	if ((stopped >= 1))
+		return (false);
+	check_died_waiting(diogene);
+	if (diogene->nbr_eat >= diogene->nbr_eat_max)
+		return (false);
 	pthread_mutex_lock(diogene->own_fork->mutex);
 	pthread_mutex_lock(diogene->nubble_fork->mutex);
 	diogene->own_fork->fork = true;
 	diogene->state = eating;
-	if (diogene->nbr_eat > diogene->nbr_eat_max)
-	{
-		diogene->state = bulimia;
-		return (false);
-	}
 	diogene->nbr_eat++;
 	if (!sync_code(diogene))
+	{
+		stopped++;
 		return (false);
+	}
 	diogene->last_eat = ft_time();
 	ft_usleep(diogene->tt_eat);
 	diogene->own_fork->fork = false;
@@ -80,9 +85,16 @@ bool	eat(t_philo *diogene)
 
 bool	ft_sleep(t_philo *nietzsche)
 {
+	static bool	stopped = 0;
+
+	if (stopped >= 1)
+		return (false);
 	nietzsche->state = sleeping;
 	if ((ft_time() - (nietzsche->last_eat)) >= nietzsche->tt_die)
+	{
 		nietzsche->state = died;
+		stopped++;
+	}
 	if (!sync_code(nietzsche))
 		return (false);
 	if (((ft_time() + nietzsche->tt_sleep) - (nietzsche->last_eat))
@@ -99,7 +111,5 @@ bool	ft_sleep(t_philo *nietzsche)
 bool	think(t_philo *descartes)
 {
 	descartes->state = thinking;
-	if ((ft_time() - descartes->last_eat) > descartes->tt_die)
-		descartes->state = died;
 	return (sync_code(descartes));
 }
