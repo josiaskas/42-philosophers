@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
+/*   By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:22:34 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/11/12 01:21:14 by jkasongo         ###   ########.fr       */
+/*   Updated: 2021/11/15 16:03:39 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ bool	ft_sleep(t_philo *nietzsche)
 	}
 	if (!sync_code(nietzsche))
 		return (false);
-	if (((ft_time() + nietzsche->tt_sleep) - (nietzsche->last_eat))
-		>= nietzsche->tt_die)
+	if ((long long)(nietzsche->tt_die - (ft_time() - nietzsche->last_eat))
+		< (long long)nietzsche->tt_eat)
 	{
-		usleep(1);
+		ft_usleep((nietzsche->tt_die - (ft_time() - nietzsche->last_eat)));
 		nietzsche->state = died;
+		stopped++;
 		return (sync_code(nietzsche));
 	}
 	ft_usleep(nietzsche->tt_sleep);
