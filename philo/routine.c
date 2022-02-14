@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:22:34 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/11/12 01:21:14 by jkasongo         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:10:06 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ bool	eat(t_philo *diogene)
 
 	if ((stopped >= 1))
 		return (false);
-	check_died_waiting(diogene);
 	if (diogene->nbr_eat >= diogene->nbr_eat_max)
 		return (false);
 	pthread_mutex_lock(diogene->own_fork->mutex);
@@ -75,8 +74,9 @@ bool	eat(t_philo *diogene)
 		stopped++;
 		return (false);
 	}
-	diogene->last_eat = ft_time();
+	check_died_waiting(diogene);
 	ft_usleep(diogene->tt_eat);
+	diogene->last_eat = ft_time();
 	diogene->own_fork->fork = false;
 	pthread_mutex_unlock(diogene->nubble_fork->mutex);
 	pthread_mutex_unlock(diogene->own_fork->mutex);
