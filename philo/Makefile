@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+         #
+#    By: jkasongo <jkasongo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/14 13:57:50 by jkasongo          #+#    #+#              #
-#    Updated: 2021/10/18 00:45:57 by jkasongo         ###   ########.fr        #
+#    Updated: 2021/11/15 16:12:49 by jkasongo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread
 
 #source
 SRCS =	main.c utils.c parse_args.c routine.c sync_code.c philo_init.c\
