@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/17 01:22:34 by jkasongo          #+#    #+#             */
-/*   Updated: 2022/02/14 15:10:06 by jkasongo         ###   ########.fr       */
+/*   Updated: 2022/02/14 15:49:32 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,11 +97,12 @@ bool	ft_sleep(t_philo *nietzsche)
 	}
 	if (!sync_code(nietzsche))
 		return (false);
-	if (((ft_time() + nietzsche->tt_sleep) - (nietzsche->last_eat))
-		>= nietzsche->tt_die)
+	if ((long long)(nietzsche->tt_die - (ft_time() - nietzsche->last_eat))
+		< (long long)nietzsche->tt_eat)
 	{
-		usleep(1);
+		ft_usleep((nietzsche->tt_die - (ft_time() - nietzsche->last_eat)));
 		nietzsche->state = died;
+		stopped++;
 		return (sync_code(nietzsche));
 	}
 	ft_usleep(nietzsche->tt_sleep);
