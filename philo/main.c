@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:58:40 by jkasongo          #+#    #+#             */
-/*   Updated: 2022/03/04 20:16:42 by jkasongo         ###   ########.fr       */
+/*   Updated: 2022/03/04 21:11:14 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	control_threads(t_agora *app, t_philo *table)
 				bulimia_club++;
 			if (check_died(socrate) || (bulimia_club == app->philo_nbr))
 			{
-				// printf("We found one is name %ld\n",socrate->number);
 				control = false;
 				break ;
 			}
