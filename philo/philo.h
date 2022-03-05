@@ -6,7 +6,7 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 14:55:37 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/11/12 00:47:36 by jkasongo         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:04:40 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_agora
 void	init_philosphers_data(t_agora *app);
 void	*genesis(void *philosopher);
 void	*last_day(void *philosopher);
-bool	check_died_waiting(t_philo *hugo);
+bool	check_died(t_philo *hugo);
 bool	sync_code(t_philo *kant);
 
 void	clean_table(t_agora *app);

@@ -6,11 +6,41 @@
 /*   By: jkasongo <jkasongo@student.42quebec.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 13:58:40 by jkasongo          #+#    #+#             */
-/*   Updated: 2021/10/26 00:16:10 by jkasongo         ###   ########.fr       */
+/*   Updated: 2022/03/04 20:16:42 by jkasongo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	control_threads(t_agora *app, t_philo *table)
+{
+	bool	control;
+	t_philo	*socrate;
+	size_t	i;
+	size_t	bulimia_club;
+
+	control = true;
+	table = app->table;
+	while (control)
+	{
+		i = 0;
+		bulimia_club = 0;
+		usleep(200);
+		while (i < app->philo_nbr)
+		{
+			socrate = &table[i];
+			if (socrate->state == bulimia)
+				bulimia_club++;
+			if (check_died(socrate) || (bulimia_club == app->philo_nbr))
+			{
+				// printf("We found one is name %ld\n",socrate->number);
+				control = false;
+				break ;
+			}
+			i ++;
+		}
+	}
+}
 
 bool	run_threads(t_agora *app)
 {
@@ -35,6 +65,7 @@ bool	run_threads(t_agora *app)
 		pthread_create(&table[i].thread_id, NULL, genesis, (void *)&table[i]);
 		i += 2;
 	}
+	control_threads(app, table);
 	return (true);
 }
 
