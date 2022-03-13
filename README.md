@@ -1,4 +1,4 @@
-# Philosophers
+# 42-Philosophers
 Qui aurait cru que philosopher serait si mortel ?
 
 ## Jeu
